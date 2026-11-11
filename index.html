@@ -8,370 +8,261 @@
 <style>
 :root {
   --bg: #000d1a;
-  --grad: linear-gradient(135deg, #0a1628 0%, #0d2444 50%, #0a1628 100%);
   --gold: #FFD700;
   --gold2: #FFA500;
   --cyan: #00E5FF;
   --green: #00FF88;
-  --blue: #2168FD;
-  --blue2: #3AE4C9;
-  --border-glow: rgba(0,229,255,0.35);
-  --box-bg: rgba(0,20,50,0.85);
+  --blue: #1a3a8f;
+  --blue2: #0d2060;
+  --box-open: #0a2a60;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Manrope', sans-serif;
-  background: var(--bg);
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Manrope',sans-serif;
+  background: radial-gradient(ellipse at 50% 0%, #0a2050 0%, #040e28 50%, #000510 100%);
+  min-height:100vh; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* ── STARFIELD ── */
-.stars {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(33,104,253,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(58,228,201,0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #000d1a 0%, #000510 100%);
-}
-.star {
-  position: absolute; border-radius: 50%;
-  background: white; animation: twinkle var(--d) infinite ease-in-out var(--delay);
-}
-@keyframes twinkle {
-  0%,100% { opacity: 0.1; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.4); }
-}
+/* ── STARS ── */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) infinite ease-in-out var(--dl);}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(1);}50%{opacity:.85;transform:scale(1.5);}}
 
 /* ── HEADER ── */
-.header {
-  position: relative; z-index: 10;
-  background: linear-gradient(180deg, #0a2050 0%, #061435 60%, transparent 100%);
-  padding: 0;
+.header{
+  position:relative;z-index:10;
+  background:linear-gradient(180deg,#0a2a6e 0%,#061848 60%,transparent 100%);
+  padding:0;
 }
-.header-top {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 32px 14px;
-  background: linear-gradient(90deg, #061a40 0%, #0a2a5e 40%, #0d3070 60%, #061a40 100%);
-  border-bottom: 2px solid rgba(0,229,255,0.3);
-  box-shadow: 0 4px 32px rgba(0,100,255,0.3);
+.header-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 28px 12px;
+  background:linear-gradient(90deg,#061a40,#0a2a5e 40%,#0d3070 60%,#061a40);
+  border-bottom:2px solid rgba(0,229,255,.35);
+  box-shadow:0 4px 32px rgba(0,100,255,.3);
+  flex-wrap:wrap; gap:12px;
 }
-.logo-area {
-  display: flex; align-items: center; gap: 16px;
+.logo-area{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.logo-img{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,#1a3a6e,#0a1e44);
+  border:2.5px solid rgba(0,229,255,.5);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 20px rgba(0,229,255,.3);
+  flex-shrink:0; overflow:hidden;
 }
-.logo-circle {
-  width: 68px; height: 68px; border-radius: 50%;
-  background: linear-gradient(135deg, #1a3a6e, #0a1e44);
-  border: 2.5px solid rgba(0,229,255,0.5);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 20px rgba(0,229,255,0.3);
-  flex-shrink: 0;
-  position: relative; overflow: hidden;
+.logo-svg{width:52px;height:52px;}
+.title-block{text-align:center;flex:1;min-width:200px;}
+.title-main{
+  font-size:clamp(26px,4vw,42px);font-weight:900;color:#fff;
+  letter-spacing:-1px;line-height:1;text-shadow:0 0 30px rgba(0,229,255,.4);
 }
-.logo-circle::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 40% 35%, rgba(0,229,255,0.15), transparent 60%);
+.title-main span{
+  background:linear-gradient(90deg,#00E5FF,#00FF88);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.logo-inner {
-  font-size: 9px; font-weight: 900; color: #00E5FF;
-  text-align: center; line-height: 1.2; letter-spacing: 0.5px;
-  position: relative; z-index: 1;
+.title-pill{
+  display:inline-block;margin-top:6px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;padding:4px 20px;
+  font-size:14px;font-weight:700;color:#e0e8ff;letter-spacing:1px;
 }
-.title-block { text-align: center; flex: 1; }
-.title-main {
-  font-size: clamp(28px, 4vw, 42px); font-weight: 900;
-  color: #fff; letter-spacing: -1px; line-height: 1;
-  text-shadow: 0 0 30px rgba(0,229,255,0.4);
-}
-.title-main span {
-  background: linear-gradient(90deg, #00E5FF, #00FF88);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.title-sub {
-  display: inline-block; margin-top: 6px;
-  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 20px; padding: 4px 20px;
-  font-size: 15px; font-weight: 700; color: #e0e8ff; letter-spacing: 1px;
-}
-.predict-tag {
-  text-align: right; color: #93C5FD; font-size: 14px; font-weight: 700; line-height: 1.4;
-  min-width: 140px;
-}
+.predict-tag{text-align:right;color:#93C5FD;font-size:13px;font-weight:700;line-height:1.5;min-width:130px;}
 
 /* ── STAT CHIPS ── */
-.stats-bar {
-  display: flex; justify-content: center; gap: 16px;
-  padding: 14px 32px 16px;
-  background: linear-gradient(180deg, #061435, #040e28);
+.stats-bar{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+  padding:12px 28px 14px;
+  background:linear-gradient(180deg,#061435,#040e28);
 }
-.stat-chip {
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(0,10,30,0.9); border: 2px solid rgba(0,229,255,0.25);
-  border-radius: 12px; padding: 10px 24px;
-  min-width: 150px; justify-content: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+.stat-chip{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(0,10,30,.9);border:2px solid rgba(0,229,255,.25);
+  border-radius:12px;padding:9px 20px;min-width:140px;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
 }
-.stat-chip.gold { border-color: rgba(255,215,0,0.4); }
-.stat-icon { font-size: 22px; flex-shrink: 0; }
-.stat-num {
-  font-size: 28px; font-weight: 900; line-height: 1;
-  display: block;
-}
-.stat-label {
-  font-size: 12px; font-weight: 600; color: #93C5FD; letter-spacing: 0.5px;
-  display: block; margin-top: 1px;
-}
-.chip-total .stat-num { color: #FFD700; }
-.chip-opened .stat-num { color: #00E5FF; }
-.chip-remain .stat-num { color: #00FF88; }
+.chip-gold{border-color:rgba(255,215,0,.4);}
+.stat-icon{font-size:20px;flex-shrink:0;}
+.stat-num{font-size:26px;font-weight:900;line-height:1;display:block;}
+.stat-label{font-size:11px;font-weight:600;color:#93C5FD;letter-spacing:.5px;display:block;margin-top:1px;}
+.c-total .stat-num{color:#FFD700;}
+.c-opened .stat-num{color:#00E5FF;}
+.c-remain .stat-num{color:#00FF88;}
 
-/* ── MAIN AREA ── */
-.main {
-  position: relative; z-index: 5;
-  max-width: 1100px; margin: 0 auto;
-  padding: 28px 24px 48px;
-}
-
-/* ── RESULT SPOTLIGHT ── */
-.result-spotlight {
-  text-align: center; margin-bottom: 32px;
-  min-height: 160px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-}
-.result-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  color: #3AE4C9; margin-bottom: 10px;
-}
-.result-number {
-  font-size: clamp(80px, 14vw, 130px); font-weight: 900;
-  line-height: 1; letter-spacing: -4px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  filter: drop-shadow(0 0 32px rgba(255,215,0,0.5));
-  animation: glow-pulse 2s ease-in-out infinite;
-  display: none;
-}
-.result-number.show { display: block; }
-.result-idle {
-  font-size: 18px; font-weight: 600; color: rgba(147,197,253,0.5);
-  letter-spacing: 1px;
-}
-.result-idle.hide { display: none; }
-@keyframes glow-pulse {
-  0%,100% { filter: drop-shadow(0 0 24px rgba(255,215,0,0.4)); }
-  50% { filter: drop-shadow(0 0 56px rgba(255,215,0,0.9)); }
-}
-@keyframes spin-reveal {
-  0% { opacity:0; transform: scale(0.3) rotate(-20deg); }
-  60% { transform: scale(1.15) rotate(3deg); }
-  100% { opacity:1; transform: scale(1) rotate(0deg); }
-}
-.result-number.animate { animation: spin-reveal 0.6s cubic-bezier(.34,1.56,.64,1) forwards, glow-pulse 2s 0.6s ease-in-out infinite; }
-
-/* ── BUTTON ── */
-.btn-wrap { text-align: center; margin-bottom: 36px; }
-.btn-random {
-  font-family: 'Manrope', sans-serif;
-  font-size: 20px; font-weight: 900; letter-spacing: 1px;
-  color: #00263E; cursor: pointer; border: none; outline: none;
-  padding: 18px 56px; border-radius: 50px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-  background-size: 200% 100%;
-  box-shadow: 0 6px 32px rgba(255,180,0,0.5), 0 2px 8px rgba(0,0,0,0.5);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  position: relative; overflow: hidden;
-}
-.btn-random::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease;
-}
-.btn-random:hover::before { transform: translateX(100%); }
-.btn-random:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,180,0,0.65); }
-.btn-random:active { transform: translateY(0); }
-.btn-random:disabled {
-  background: linear-gradient(90deg, #555, #333);
-  color: #888; cursor: not-allowed; box-shadow: none;
-  transform: none;
-}
-
-.btn-reset {
-  font-family: 'Manrope', sans-serif;
-  font-size: 14px; font-weight: 700; letter-spacing: 1px;
-  color: #93C5FD; cursor: pointer; border: 2px solid rgba(147,197,253,0.3);
-  outline: none; background: transparent;
-  padding: 10px 28px; border-radius: 50px; margin-left: 16px;
-  transition: all 0.2s ease;
-}
-.btn-reset:hover { background: rgba(147,197,253,0.08); border-color: rgba(147,197,253,0.6); }
+/* ── MAIN ── */
+.main{position:relative;z-index:5;padding:24px 20px 56px;max-width:1180px;margin:0 auto;}
 
 /* ── GRID ── */
-.grid-section-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #3AE4C9;
-  text-transform: uppercase; margin-bottom: 14px; text-align: center;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(72px,1fr));
+  gap:8px;
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
-  gap: 7px;
+
+/* ── FLIP CARD ── */
+.card{
+  width:100%;aspect-ratio:1;perspective:600px;cursor:pointer;
 }
-.box {
-  aspect-ratio: 1;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 10px;
-  font-size: 14px; font-weight: 800;
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease;
-  position: relative; overflow: hidden;
-  user-select: none;
-  border: 1.5px solid rgba(0,100,200,0.4);
-  background: linear-gradient(135deg, #0d2a5e 0%, #081840 100%);
-  color: #93C5FD;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+.card-inner{
+  width:100%;height:100%;position:relative;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
 }
-.box::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.08), transparent 60%);
-  pointer-events: none;
+.card.flipped .card-inner{transform:rotateY(180deg);}
+.card-front,.card-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
 }
-.box:hover:not(.opened) {
-  transform: translateY(-3px) scale(1.08);
-  box-shadow: 0 8px 20px rgba(0,100,255,0.4);
-  border-color: rgba(0,229,255,0.5);
+
+/* FRONT — gift box */
+.card-front{
+  background:linear-gradient(135deg,#0d2a6e 0%,#081840 100%);
+  border:2px solid rgba(0,180,255,.45);
+  box-shadow:0 2px 10px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.07);
+  flex-direction:column; gap:2px;
+  overflow:hidden; position:relative;
 }
-.box.opened {
-  background: linear-gradient(135deg, #1a4a0a, #0d3005);
-  border-color: rgba(0,255,136,0.5);
-  color: #00FF88;
-  box-shadow: 0 0 16px rgba(0,255,136,0.3);
-  cursor: default;
+.card-front::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 40% 30%,rgba(255,255,255,.07),transparent 60%);
+  pointer-events:none;
 }
-.box.opened::after {
-  content: '✓';
-  position: absolute; top: 2px; right: 5px;
-  font-size: 9px; color: rgba(0,255,136,0.6);
+.card:hover:not(.flipped) .card-front{
+  border-color:rgba(0,229,255,.7);
+  box-shadow:0 0 18px rgba(0,180,255,.5);
 }
-.box.highlighted {
-  background: linear-gradient(135deg, #7a4a00, #5a3300) !important;
-  border-color: rgba(255,215,0,0.9) !important;
-  color: #FFD700 !important;
-  box-shadow: 0 0 24px rgba(255,215,0,0.7), 0 0 48px rgba(255,180,0,0.3) !important;
-  transform: scale(1.15) !important;
-  z-index: 2;
+.gift-svg{width:40px;height:40px;flex-shrink:0;}
+.box-num-front{
+  font-size:11px;font-weight:800;color:rgba(147,197,253,.6);
+  letter-spacing:.5px;position:absolute;bottom:5px;right:7px;
 }
-.box.rolling {
-  animation: roll 0.08s ease-in-out infinite alternate;
+
+/* BACK — revealed number */
+.card-back{
+  background:linear-gradient(135deg,#0a3010 0%,#051a06 100%);
+  border:2px solid rgba(0,255,136,.5);
+  box-shadow:0 0 16px rgba(0,255,136,.3);
+  transform:rotateY(180deg);
+  flex-direction:column; gap:4px;
+  overflow:hidden;
 }
-@keyframes roll {
-  from { transform: scale(1.0); background: linear-gradient(135deg,#1a3060,#0d1e44); }
-  to { transform: scale(1.06); background: linear-gradient(135deg,#2a1a60,#1a0d44); }
+.card-back::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 40%,rgba(0,255,136,.12),transparent 65%);
+  pointer-events:none;
+}
+.reveal-num{
+  font-size:clamp(18px,2.5vw,26px);font-weight:900;
+  color:#FFD700;line-height:1;
+  text-shadow:0 0 14px rgba(255,215,0,.7);
+  position:relative;z-index:1;
+}
+.reveal-check{font-size:14px;color:rgba(0,255,136,.8);position:relative;z-index:1;}
+
+/* ── CONFETTI ── */
+.confetti-piece{
+  position:fixed;border-radius:2px;pointer-events:none;z-index:9999;
+  animation:cffall var(--dur) ease-in var(--dl) forwards;
+}
+@keyframes cffall{
+  0%{transform:translate(0,-20px) rotate(0deg);opacity:1;}
+  100%{transform:translate(var(--tx),100vh) rotate(var(--rot));opacity:0;}
 }
 
 /* ── HISTORY ── */
-.history-section {
-  margin-top: 32px;
-  background: rgba(0,10,30,0.7); border: 1px solid rgba(0,229,255,0.15);
-  border-radius: 16px; padding: 20px 24px;
+.history-section{
+  margin-top:28px;
+  background:rgba(0,10,30,.7);border:1px solid rgba(0,229,255,.15);
+  border-radius:16px;padding:18px 22px;
 }
-.history-title {
-  font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #3AE4C9;
-  text-transform: uppercase; margin-bottom: 14px;
+.history-title{
+  font-size:10px;font-weight:700;letter-spacing:3px;color:#3AE4C9;
+  text-transform:uppercase;margin-bottom:12px;
 }
-.history-chips {
-  display: flex; flex-wrap: wrap; gap: 8px;
+.history-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.h-chip{
+  background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.35);
+  border-radius:20px;padding:4px 14px;
+  font-size:14px;font-weight:800;color:#FFD700;
 }
-.h-chip {
-  background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3);
-  border-radius: 20px; padding: 4px 14px;
-  font-size: 14px; font-weight: 800; color: #FFD700;
-}
-.h-empty { color: rgba(147,197,253,0.3); font-size: 14px; font-weight: 600; }
+.h-empty{color:rgba(147,197,253,.35);font-size:13px;font-weight:600;}
 
-/* ── CONFETTI ── */
-.confetti-piece {
-  position: fixed; width: 10px; height: 10px; border-radius: 2px;
-  pointer-events: none; z-index: 9999;
-  animation: confetti-fall var(--dur) ease-in var(--delay) forwards;
+/* ── RESET BTN ── */
+.btn-bar{text-align:center;margin-bottom:22px;}
+.btn-reset{
+  font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:1px;color:#93C5FD;cursor:pointer;
+  border:2px solid rgba(147,197,253,.3);outline:none;
+  background:transparent;padding:10px 32px;border-radius:50px;
+  transition:all .2s ease;
 }
-@keyframes confetti-fall {
-  0% { transform: translate(0, -20px) rotate(0deg); opacity: 1; }
-  100% { transform: translate(var(--tx), 100vh) rotate(var(--rot)); opacity: 0; }
+.btn-reset:hover{background:rgba(147,197,253,.08);border-color:rgba(147,197,253,.6);}
+
+.section-label{
+  font-size:10px;font-weight:700;letter-spacing:3px;color:#3AE4C9;
+  text-transform:uppercase;text-align:center;margin-bottom:16px;
 }
 </style>
 </head>
 <body>
-
 <div class="stars" id="stars"></div>
 
 <!-- HEADER -->
 <div class="header">
   <div class="header-top">
     <div class="logo-area">
-      <div class="logo-circle">
-        <div class="logo-inner">Predictive<br>Quality</div>
+      <div class="logo-img">
+        <svg class="logo-svg" viewBox="0 0 52 52" fill="none">
+          <circle cx="26" cy="26" r="22" stroke="#00E5FF" stroke-width="1.8" stroke-dasharray="4 3"/>
+          <ellipse cx="26" cy="22" rx="9" ry="10" stroke="#00E5FF" stroke-width="1.8" fill="rgba(0,229,255,0.07)"/>
+          <path d="M18 32 Q26 44 34 32" stroke="#FFD700" stroke-width="1.8" fill="none"/>
+          <path d="M17 24 Q11 20 14 14 Q20 10 24 18" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+          <path d="M35 24 Q41 20 38 14 Q32 10 28 18" stroke="#00E5FF" stroke-width="1.5" fill="none"/>
+          <circle cx="22" cy="21" r="2" fill="#00E5FF"/>
+          <circle cx="30" cy="21" r="2" fill="#00E5FF"/>
+          <path d="M22 27 Q26 30 30 27" stroke="#FFD700" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M26 10 L26 6 M26 6 L22 10 M26 6 L30 10" stroke="#FFD700" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M38 34 L44 28 M43 32 L46 24 M40 36 L46 32" stroke="#00FF88" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+        </svg>
       </div>
     </div>
     <div class="title-block">
       <div class="title-main">Predictive <span>Quality</span></div>
-      <div class="title-sub">Mystery Prize</div>
+      <div class="title-pill">Mystery Prize</div>
     </div>
     <div class="predict-tag">Predict Today<br>for a Better Tomorrow</div>
   </div>
   <div class="stats-bar">
-    <div class="stat-chip chip-total">
+    <div class="stat-chip c-total">
       <span class="stat-icon">🎁</span>
-      <div>
-        <span class="stat-num" id="totalCount">191</span>
-        <span class="stat-label">จำนวนกล่องทั้งหมด</span>
-      </div>
+      <div><span class="stat-num" id="totalCount">191</span><span class="stat-label">จำนวนกล่องทั้งหมด</span></div>
     </div>
-    <div class="stat-chip gold chip-opened">
+    <div class="stat-chip chip-gold c-opened">
       <span class="stat-icon">⭐</span>
-      <div>
-        <span class="stat-num" id="openedCount">0</span>
-        <span class="stat-label">เปิดแล้ว</span>
-      </div>
+      <div><span class="stat-num" id="openedCount">0</span><span class="stat-label">เปิดแล้ว</span></div>
     </div>
-    <div class="stat-chip chip-remain">
+    <div class="stat-chip c-remain">
       <span class="stat-icon">🎀</span>
-      <div>
-        <span class="stat-num" id="remainCount">191</span>
-        <span class="stat-label">คงเหลือ</span>
-      </div>
+      <div><span class="stat-num" id="remainCount">191</span><span class="stat-label">คงเหลือ</span></div>
     </div>
   </div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
-
-  <!-- RESULT -->
-  <div class="result-spotlight">
-    <div class="result-label">หมายเลขที่ได้รับ</div>
-    <div class="result-number" id="resultNum">0</div>
-    <div class="result-idle" id="resultIdle">กดปุ่มเพื่อสุ่มหมายเลข</div>
+  <div class="btn-bar">
+    <button class="btn-reset" onclick="doReset()">↺ รีเซ็ตทั้งหมด</button>
   </div>
-
-  <!-- BUTTONS -->
-  <div class="btn-wrap">
-    <button class="btn-random" id="btnRandom" onclick="doRandom()">🎲 สุ่มหมายเลข</button>
-    <button class="btn-reset" onclick="doReset()">รีเซ็ต</button>
-  </div>
-
-  <!-- GRID -->
-  <div class="grid-section-label">หมายเลขทั้งหมด — คลิกที่กล่องเพื่อทำเครื่องหมาย</div>
+  <div class="section-label">คลิกกล่องเพื่อเปิดรับหมายเลขของคุณ</div>
   <div class="grid" id="numGrid"></div>
-
-  <!-- HISTORY -->
   <div class="history-section">
-    <div class="history-title">ประวัติการสุ่ม</div>
-    <div class="history-chips" id="historyChips">
-      <span class="h-empty">ยังไม่มีการสุ่ม</span>
-    </div>
+    <div class="history-title">ประวัติการเปิดกล่อง</div>
+    <div class="history-chips" id="historyChips"><span class="h-empty">ยังไม่มีการเปิดกล่อง</span></div>
   </div>
-
 </div>
 
 <script>
@@ -379,47 +270,76 @@ const ALL_NUMS = [5,6,7,8,9,10,12,13,15,16,17,18,19,21,23,24,25,28,30,31,32,34,3
 
 let opened = new Set();
 let history = [];
-let rolling = false;
-let lastHighlighted = null;
 
-// Build stars
+// Shuffle ALL_NUMS so each session has random box order
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+let shuffled = shuffle(ALL_NUMS);
+
+// Stars
 (function(){
-  const s = document.getElementById('stars');
-  for(let i=0;i<80;i++){
-    const el=document.createElement('div'); el.className='star';
-    const sz=Math.random()*2.5+0.5;
-    el.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(2+Math.random()*4)+'s;--delay:'+(Math.random()*4)+'s';
+  const s=document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const el=document.createElement('div');el.className='star';
+    const sz=Math.random()*2+0.5;
+    el.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(2+Math.random()*5)+'s;--dl:'+(Math.random()*5)+'s';
     s.appendChild(el);
   }
 })();
 
-// Build grid
+function giftSVG(boxNum){
+  const hue = (boxNum * 37) % 360;
+  const colors = [
+    {ribbon:'#FFD700',box:'#c0392b',lid:'#e74c3c'},
+    {ribbon:'#00E5FF',box:'#1a3a8f',lid:'#2a4aaf'},
+    {ribbon:'#FFD700',box:'#1a6b1a',lid:'#2a8b2a'},
+    {ribbon:'#FF69B4',box:'#6b1a6b',lid:'#8b2a8b'},
+    {ribbon:'#FFA500',box:'#1a4a7a',lid:'#2a5a9a'},
+    {ribbon:'#00FF88',box:'#1a1a6b',lid:'#2a2a8b'},
+  ];
+  const c = colors[boxNum % colors.length];
+  return `<svg class="gift-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="18" width="32" height="22" rx="2" fill="${c.box}" opacity=".9"/>
+    <rect x="6" y="13" width="32" height="7" rx="2" fill="${c.lid}"/>
+    <rect x="19" y="13" width="6" height="27" fill="${c.ribbon}" opacity=".85"/>
+    <rect x="6" y="18" width="32" height="4" fill="${c.ribbon}" opacity=".7"/>
+    <ellipse cx="22" cy="13" rx="8" ry="4" fill="${c.ribbon}" opacity=".5"/>
+    <path d="M22 9 Q18 5 14 9 Q14 13 22 13 Q30 13 30 9 Q26 5 22 9Z" fill="${c.ribbon}" opacity=".9"/>
+    <circle cx="22" cy="11" r="2" fill="rgba(255,255,255,0.4)"/>
+  </svg>`;
+}
+
 function buildGrid(){
   const grid=document.getElementById('numGrid');
   grid.innerHTML='';
-  ALL_NUMS.forEach(n=>{
-    const box=document.createElement('div');
-    box.className='box'+(opened.has(n)?' opened':'');
-    box.id='box-'+n;
-    box.textContent=n;
-    box.title='#'+n;
-    box.onclick=()=>toggleBox(n);
-    grid.appendChild(box);
+  shuffled.forEach((n,i)=>{
+    const card=document.createElement('div');
+    card.className='card'+(opened.has(n)?' flipped':'');
+    card.id='card-'+n;
+    card.innerHTML=
+      '<div class="card-inner">'+
+        '<div class="card-front">'+giftSVG(n)+'<span class="box-num-front">'+(i+1)+'</span></div>'+
+        '<div class="card-back">'+
+          '<span class="reveal-num">'+n+'</span>'+
+          '<span class="reveal-check">✓ เปิดแล้ว</span>'+
+        '</div>'+
+      '</div>';
+    card.onclick=()=>flipCard(n,card);
+    grid.appendChild(card);
   });
 }
 
-function toggleBox(n){
-  if(rolling) return;
-  if(opened.has(n)){
-    opened.delete(n);
-  } else {
-    opened.add(n);
-  }
+function flipCard(n, cardEl){
+  if(opened.has(n)) return;
+  opened.add(n);
+  cardEl.classList.add('flipped');
   updateStats();
-  const box=document.getElementById('box-'+n);
-  if(box){
-    box.className='box'+(opened.has(n)?' opened':'');
-  }
+  history.unshift(n);
+  updateHistory();
+  spawnConfetti();
 }
 
 function updateStats(){
@@ -427,136 +347,34 @@ function updateStats(){
   document.getElementById('remainCount').textContent=ALL_NUMS.length-opened.size;
 }
 
-function getRemaining(){
-  return ALL_NUMS.filter(n=>!opened.has(n));
-}
-
-function doRandom(){
-  if(rolling) return;
-  const rem=getRemaining();
-  if(rem.length===0){
-    alert('หมายเลขทั้งหมดถูกสุ่มหมดแล้ว! กดรีเซ็ตเพื่อเริ่มใหม่');
-    return;
-  }
-  rolling=true;
-  document.getElementById('btnRandom').disabled=true;
-
-  // Clear previous highlight
-  if(lastHighlighted!==null){
-    const prevBox=document.getElementById('box-'+lastHighlighted);
-    if(prevBox && !opened.has(lastHighlighted)) prevBox.classList.remove('highlighted');
-    lastHighlighted=null;
-  }
-
-  document.getElementById('resultNum').classList.remove('show','animate');
-  document.getElementById('resultIdle').classList.remove('hide');
-  document.getElementById('resultIdle').textContent='กำลังสุ่ม...';
-
-  // Rolling animation
-  let rollCount=0;
-  const maxRolls=22;
-  let currentFlash=null;
-
-  const rollInterval=setInterval(()=>{
-    if(currentFlash!==null){
-      const b=document.getElementById('box-'+currentFlash);
-      if(b) b.classList.remove('rolling');
-    }
-    const rIdx=Math.floor(Math.random()*rem.length);
-    currentFlash=rem[rIdx];
-    const b=document.getElementById('box-'+currentFlash);
-    if(b) b.classList.add('rolling');
-    rollCount++;
-
-    if(rollCount>=maxRolls){
-      clearInterval(rollInterval);
-      if(currentFlash!==null){
-        const fb=document.getElementById('box-'+currentFlash);
-        if(fb) fb.classList.remove('rolling');
-      }
-
-      // Pick final random
-      const finalIdx=Math.floor(Math.random()*rem.length);
-      const finalNum=rem[finalIdx];
-
-      // Highlight box
-      const fBox=document.getElementById('box-'+finalNum);
-      if(fBox){
-        fBox.classList.add('highlighted');
-        lastHighlighted=finalNum;
-        fBox.scrollIntoView({behavior:'smooth', block:'center'});
-      }
-
-      // Show result
-      document.getElementById('resultIdle').classList.add('hide');
-      const rn=document.getElementById('resultNum');
-      rn.textContent=finalNum;
-      rn.classList.add('show','animate');
-
-      // Mark as opened
-      opened.add(finalNum);
-      updateStats();
-      if(fBox) setTimeout(()=>{
-        fBox.classList.remove('highlighted');
-        fBox.className='box opened';
-        lastHighlighted=null;
-      },2500);
-
-      // History
-      history.unshift(finalNum);
-      updateHistory();
-
-      // Confetti
-      spawnConfetti();
-
-      rolling=false;
-      document.getElementById('btnRandom').disabled=false;
-      if(getRemaining().length===0){
-        document.getElementById('btnRandom').disabled=true;
-        document.getElementById('btnRandom').textContent='หมดแล้ว!';
-      }
-    }
-  }, 90);
-}
-
 function updateHistory(){
   const c=document.getElementById('historyChips');
-  if(history.length===0){
-    c.innerHTML='<span class="h-empty">ยังไม่มีการสุ่ม</span>';
-    return;
-  }
+  if(history.length===0){c.innerHTML='<span class="h-empty">ยังไม่มีการเปิดกล่อง</span>';return;}
   c.innerHTML=history.map(n=>'<span class="h-chip">'+n+'</span>').join('');
 }
 
 function doReset(){
-  if(rolling) return;
-  if(!confirm('รีเซ็ตทั้งหมดหรือไม่? หมายเลขที่เปิดแล้วทั้งหมดจะกลับมาใหม่')) return;
+  if(!confirm('รีเซ็ตทั้งหมดหรือไม่? กล่องทุกใบจะปิดใหม่')) return;
   opened.clear();
   history=[];
-  lastHighlighted=null;
+  shuffled=shuffle(ALL_NUMS);
   updateStats();
   updateHistory();
   buildGrid();
-  document.getElementById('resultNum').classList.remove('show','animate');
-  document.getElementById('resultNum').textContent='0';
-  document.getElementById('resultIdle').classList.remove('hide');
-  document.getElementById('resultIdle').textContent='กดปุ่มเพื่อสุ่มหมายเลข';
-  document.getElementById('btnRandom').disabled=false;
-  document.getElementById('btnRandom').textContent='🎲 สุ่มหมายเลข';
 }
 
 function spawnConfetti(){
-  const colors=['#FFD700','#00E5FF','#00FF88','#FF6B6B','#FF9800','#E040FB','#ffffff'];
-  for(let i=0;i<48;i++){
-    const el=document.createElement('div'); el.className='confetti-piece';
-    const c=colors[Math.floor(Math.random()*colors.length)];
-    el.style.cssText='background:'+c+';left:'+(30+Math.random()*40)+'%;--tx:'+(Math.random()*200-100)+'px;--rot:'+(Math.random()*720)+'deg;--dur:'+(1.2+Math.random()*1.2)+'s;--delay:'+(Math.random()*0.4)+'s;width:'+(8+Math.random()*8)+'px;height:'+(8+Math.random()*8)+'px;border-radius:'+(Math.random()>0.5?'50%':'2px');
+  const cols=['#FFD700','#00E5FF','#00FF88','#FF6B6B','#FF9800','#E040FB','#ffffff'];
+  for(let i=0;i<36;i++){
+    const el=document.createElement('div');el.className='confetti-piece';
+    const c=cols[Math.floor(Math.random()*cols.length)];
+    const w=7+Math.random()*7, h=7+Math.random()*7;
+    el.style.cssText='background:'+c+';left:'+(25+Math.random()*50)+'%;width:'+w+'px;height:'+h+'px;border-radius:'+(Math.random()>.5?'50%':'2px')+';--tx:'+(Math.random()*220-110)+'px;--rot:'+(Math.random()*720)+'deg;--dur:'+(1.1+Math.random()*1.1)+'s;--dl:'+(Math.random()*.35)+'s';
     document.body.appendChild(el);
-    setTimeout(()=>el.remove(), 3000);
+    setTimeout(()=>el.remove(),2800);
   }
 }
 
-// Init
 buildGrid();
 </script>
 </body>
